@@ -4,7 +4,7 @@
    https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/GcmEndpoints
 */
 
-package edit.com.backend;
+package edit.com.backend.endpoints;
 
 import com.google.android.gcm.server.Constants;
 import com.google.android.gcm.server.Message;
@@ -12,13 +12,14 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiNamespace;
+import edit.com.backend.records.RegistrationRecord;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.inject.Named;
 
-import static edit.com.backend.OfyService.ofy;
+import static edit.com.backend.utils.OfyService.ofy;
 
 /**
  * An endpoint to send messages to devices registered with the backend

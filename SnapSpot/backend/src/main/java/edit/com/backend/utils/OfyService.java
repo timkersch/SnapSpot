@@ -1,8 +1,9 @@
-package edit.com.backend;
+package edit.com.backend.utils;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import edit.com.backend.records.RegistrationRecord;
 
 /**
  * Objectify service wrapper so we can statically register our persistence classes
