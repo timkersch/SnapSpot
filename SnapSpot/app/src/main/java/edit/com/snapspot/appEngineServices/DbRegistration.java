@@ -42,7 +42,7 @@ public class DbRegistration {
 						gcm = GoogleCloudMessaging.getInstance(context);
 					}
 					// TODO put a sender ID in the register method-call
-					regId = gcm.register();
+					regId = gcm.register("461803206887");
 					regService.register(regId).execute();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -64,7 +64,7 @@ public class DbRegistration {
 			if(local) {
 				// Code to run on local machine
 				builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-						.setRootUrl("http://10.0.2.2:8080/_ah/api")
+						.setRootUrl("http://localhost:8080/_ah/api")
 						.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
 							@Override
 							public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -73,7 +73,7 @@ public class DbRegistration {
 						});
 			} else {
 				builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-						.setRootUrl("http://southern-shard-93711.appspot.com/");
+						.setRootUrl("https://southern-shard-93711.appspot.com/_ah/api/");
 			}
 			regService = builder.build();
 		}
