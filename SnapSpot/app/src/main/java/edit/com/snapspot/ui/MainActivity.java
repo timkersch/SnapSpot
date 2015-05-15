@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import edit.com.snapspot.R;
 import edit.com.snapspot.appEngineServices.DbRegistration;
+import edit.com.snapspot.appEngineServices.POICallback;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
