@@ -44,6 +44,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        DbRegistration.registerGcm(this);
+
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -107,8 +109,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
-        DbRegistration.registerGcm(getApplicationContext());
-        Toast.makeText(getApplicationContext(), "hej", Toast.LENGTH_LONG).show();
     }
 
     @Override

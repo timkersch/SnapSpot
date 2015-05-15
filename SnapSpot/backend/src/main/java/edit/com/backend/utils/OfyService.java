@@ -12,7 +12,8 @@ import edit.com.backend.records.RegistrationRecord;
 public class OfyService {
 
 	static {
-		ObjectifyService.register(RegistrationRecord.class);
+		factory().register(RegistrationRecord.class);
+		//factory().register(SpotsRecord.class);
 	}
 
 	public static Objectify ofy() {

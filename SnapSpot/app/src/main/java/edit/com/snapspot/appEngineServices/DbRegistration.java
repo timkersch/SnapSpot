@@ -22,11 +22,12 @@ import java.io.IOException;
  */
 public class DbRegistration {
 
-	// Set if the registration should be local or global
-	private static final boolean local = true;
+	// Set if the registration should be LOCAL or global
+	private static final boolean LOCAL = false;
+	private static final String PROJECT_ID = "461803206887";
 
-	private static Registration regService = null;
-	private static GoogleCloudMessaging gcm = null;
+	private static Registration regService;
+	private static GoogleCloudMessaging gcm;
 
 	/** Register this device for GCM
 	 * @param context
@@ -41,8 +42,7 @@ public class DbRegistration {
 					if (gcm == null) {
 						gcm = GoogleCloudMessaging.getInstance(context);
 					}
-					// TODO put a sender ID in the register method-call
-					regId = gcm.register("461803206887");
+					regId = gcm.register(PROJECT_ID);
 					regService.register(regId).execute();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -61,8 +61,8 @@ public class DbRegistration {
 	private static synchronized void initRegService() {
 		if(regService == null) {
 			Registration.Builder builder;
-			if(local) {
-				// Code to run on local machine
+			if(LOCAL) {
+				// Code to run on LOCAL machine
 				builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
 						.setRootUrl("http://localhost:8080/_ah/api")
 						.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
