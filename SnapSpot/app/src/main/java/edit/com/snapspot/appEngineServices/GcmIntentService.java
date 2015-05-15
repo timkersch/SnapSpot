@@ -41,6 +41,7 @@ public class GcmIntentService extends IntentService {
 		new Handler(Looper.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run() {
+				// TODO what to do when message is received
 				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 			}
 		});
