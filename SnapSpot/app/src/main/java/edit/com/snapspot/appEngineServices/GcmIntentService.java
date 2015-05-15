@@ -3,6 +3,9 @@ package edit.com.snapspot.appEngineServices;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 /**
@@ -31,9 +34,15 @@ public class GcmIntentService extends IntentService {
 				updateDevice(extras.getString("message"));
 			}
 		}
+		GcmBroadcastReceiver.completeWakefulIntent(intent);
 	}
 
-	private void updateDevice(String message) {
-		// TODO here goes what to do when device gets a message
+	private void updateDevice(final String message) {
+		new Handler(Looper.getMainLooper()).post(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+			}
+		});
 	}
 }

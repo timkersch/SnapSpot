@@ -12,6 +12,7 @@ import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import edit.com.backend.records.RegistrationRecord;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.inject.Named;
@@ -47,6 +48,7 @@ public class RegistrationEndpoint {
 		RegistrationRecord record = new RegistrationRecord();
 		record.setRegId(regId);
 		ofy().save().entity(record).now();
+		sendMessage(regId);
 	}
 
 	/**
@@ -78,6 +80,14 @@ public class RegistrationEndpoint {
 
 	private RegistrationRecord findRecord(String regId) {
 		return ofy().load().type(RegistrationRecord.class).filter("regId", regId).first().now();
+	}
+
+	private void sendMessage(String message) {
+		try {
+			new MessagingEndpoint().sendMessage(message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

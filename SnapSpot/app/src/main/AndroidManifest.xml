@@ -27,13 +27,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".appEngineServices.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
+
+        <receiver
+                android:name=".appEngineServices.GcmBroadcastReceiver"
+                android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <category android:name="edit.com.snapspot" />
             </intent-filter>
         </receiver>
         <service android:name=".appEngineServices.GcmIntentService" />
+
     </application>
 
 </manifest>
