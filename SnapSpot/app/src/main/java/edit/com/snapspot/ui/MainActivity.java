@@ -135,10 +135,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-        //DbOperations.addSpot(new Spot("Ottomania", "This is a description", "Street 1, 123 00, Gothenburg", System.currentTimeMillis(), 57.69632f, 11.97077f));
-	    //DbOperations.addSpot(new Spot("Ölstugan Tullen", "This is a description", "Street 2, 321 00, Gothenburg", System.currentTimeMillis(), 57.69930f, 11.94940f));
-	    //DbOperations.addSpot(new Spot("BrewDog Bar", "This is a description", "Street 3, 132 00, Gothenburg", System.currentTimeMillis(), 57.70326f, 11.95895f));
-        getPOIs();
     }
 
     @Override
@@ -191,7 +187,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     @Override
     public void onConnected(Bundle bundle) {
-        //startLocationUpdates();
+        startLocationUpdates();
     }
 
     @Override
@@ -279,6 +275,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     public void onSend(Spot spot) {
         addPOI(spot);
+        getPOIs();
     }
 
     @Override

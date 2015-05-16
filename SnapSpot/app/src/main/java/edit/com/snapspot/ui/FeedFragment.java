@@ -130,19 +130,6 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         }
     }
 
-    /**
-     * The default content for this Fragment has a TextView that is shown when
-     * the list is empty. If you would like to change the text, call this method
-     * to supply the text it should use.
-     */
-    public void setEmptyText(CharSequence emptyText) {
-        View emptyView = mListView.getEmptyView();
-
-        if (emptyView instanceof TextView) {
-            ((TextView) emptyView).setText(emptyText);
-        }
-    }
-
     @Override
     public void onClick(View v) {
         if (null != mListener) {
