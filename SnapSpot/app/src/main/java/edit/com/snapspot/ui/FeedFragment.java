@@ -71,7 +71,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         // TODO: Change Adapter to display your content
 
         cards = new ArrayList<>();
-        Spot tmp = new Spot((float)55.2, (float)55.2, "Test", "Desc", "Skaraholm 3", new DateTime(new Date()));
+        Spot tmp = new Spot("Test", "Desc", "Skaraholm 3", System.currentTimeMillis(),(float)55.2, (float)55.2);
         cards.add(new Card(tmp));
         cards.add(new Card(tmp));
 
