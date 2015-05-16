@@ -53,13 +53,11 @@
 
             <!-- 3 textvy 1 name -->
             <TextView
-                android:text="<< NAME >>"
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <!-- 4 textvy 2 adress -->
             <TextView
-                android:text="<< ADRESS >>"
                 android:id="@+id/adress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
