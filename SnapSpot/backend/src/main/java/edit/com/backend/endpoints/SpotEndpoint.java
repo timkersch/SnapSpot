@@ -55,7 +55,7 @@ public class SpotEndpoint {
 
 	@ApiMethod(name = "removeSpot")
 	public void removeSpot(@Named("name") String name) {
-		ofy().delete().entity(name);
+		ofy().delete().entity(name).now();
 	}
 
 	private void sendMessage(String message) {

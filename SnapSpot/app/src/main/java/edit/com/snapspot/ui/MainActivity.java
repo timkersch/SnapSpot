@@ -243,7 +243,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         DbOperations.addSpot(spot);
     }
 
-    public void removePOI(Spot spot){
+    public void removePOIa(Spot spot){
         DbOperations.deleteSpot(spot);
     }
 

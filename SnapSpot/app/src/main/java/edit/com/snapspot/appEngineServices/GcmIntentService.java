@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 import android.widget.Toast;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import edit.com.snapspot.R;
@@ -50,7 +51,7 @@ public class GcmIntentService extends IntentService {
 
 			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
 					.setContentTitle("SnapSpot")
-					//.setSmallIcon(R.drawable.)
+					.setSmallIcon(R.drawable.ic_launcher2)
 					.setStyle(new NotificationCompat.BigTextStyle().bigText("Someone just posted a new spot!"))
 					.setContentText("Someone just posted a new spot!");
 
