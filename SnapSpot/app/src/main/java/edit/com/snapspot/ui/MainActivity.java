@@ -16,11 +16,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -73,11 +75,17 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private FeedFragment feedFragment;
     private List<Marker> markers;
     private GoogleApiClient mGoogleApiClient;
+    private final String TAG = "MainActivity";
+    private boolean createOpen = false;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        actionBar = getSupportActionBar();
 
         DbOperations.registerGcm(this);
 
@@ -255,12 +263,32 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             createFragment = CreateFragment.newInstance();
         }
         android.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
-        trans.replace(R.id.fragment_container, createFragment, null);
+        trans.replace(R.id.create_new, createFragment);
+        trans.addToBackStack("createNew");
+        trans.commit();
+        createOpen = true;
+        actionBar.hide();
+        Log.d(TAG, "onCreateNew");
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (createOpen) {
+            backFromSettingsFragment();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    private void backFromSettingsFragment() {
+        createOpen = false;
+        getFragmentManager().popBackStack();
+        actionBar.show();
     }
 
     /**
