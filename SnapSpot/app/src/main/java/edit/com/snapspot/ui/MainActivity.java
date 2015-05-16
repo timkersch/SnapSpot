@@ -223,7 +223,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // Show markers
         showAllMarkers();
         // Update feed
-        
+        feedFragment.updateFeed(spots);
     }
 
     public void addPOI(Spot spot){

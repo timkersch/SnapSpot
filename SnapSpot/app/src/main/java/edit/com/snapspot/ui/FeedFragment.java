@@ -103,6 +103,10 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         mListener = null;
     }
 
+    public void updateFeed(List<Spot> spots){
+        // Update the adapter with new spots
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {

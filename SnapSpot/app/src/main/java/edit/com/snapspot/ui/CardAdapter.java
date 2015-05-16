@@ -25,8 +25,19 @@ public class CardAdapter extends ArrayAdapter<Card> {
         this.context = context;
     }
 
+    static class ViewHolder {
+        TextView title;
+        TextView description;
+        int position;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = new ViewHolder();
+        holder.title = (TextView) convertView.findViewById(R.id.title);
+        holder.description = (TextView) convertView.findViewById(R.id.description);
+        convertView.setTag(holder);
+
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.card_layout, parent, false);
