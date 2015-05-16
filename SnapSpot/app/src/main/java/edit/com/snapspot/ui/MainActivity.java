@@ -17,7 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edit.com.snapspot.R;
+<<<<<<< HEAD
 import edit.com.snapspot.appEngineServices.DbOperations;
+=======
+import edit.com.snapspot.appEngineServices.DbRegistration;
+import edit.com.snapspot.appEngineServices.POICallback;
+>>>>>>> 5cade4eb5945179bcc5dab3be8c0b8507dd0f8f0
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
