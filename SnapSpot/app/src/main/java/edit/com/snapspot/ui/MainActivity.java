@@ -1,6 +1,7 @@
 package edit.com.snapspot.ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.api.client.util.DateTime;
 
 import edit.com.snapspot.R;
 import edit.com.snapspot.appEngineServices.DbOperations;
@@ -128,6 +130,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
+        DbOperations.addSpot(new Spot(0, 0, "Hej", "Test", "Krona", new DateTime(new Date())));
     }
 
     @Override
