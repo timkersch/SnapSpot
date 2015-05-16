@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fab="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
+	<FrameLayout
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+
+		<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:gravity="bottom">
+			<!-- TODO add license and credit -->
+			<!--fab:fab_icon="@drawable/ic_fab_star"-->
+			<com.getbase.floatingactionbutton.FloatingActionButton
+				android:id="@+id/pink_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				fab:fab_colorNormal="@color/accent"
+				fab:fab_colorPressed="@color/accent"
+				fab:fab_labelsPosition="right"
+				android:layout_gravity="bottom|end"
+				android:layout_alignParentEnd="true"/>
+		</RelativeLayout>
+
+	</FrameLayout>
 
 </LinearLayout>
