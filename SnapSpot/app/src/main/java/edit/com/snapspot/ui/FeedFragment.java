@@ -13,6 +13,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edit.com.snapspot.R;
@@ -64,7 +65,8 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         // TODO: Change Adapter to display your content
 
         cards = new ArrayList<>();
-        Spot tmp = new Spot((float)55.2, (float)55.2, "Test", "Desc");
+        Spot tmp = new Spot((float)55.2, (float)55.2, "Test", "Desc", "Skaraholm 3", new Date());
+        cards.add(new Card(tmp));
         cards.add(new Card(tmp));
 
         mAdapter = new ArrayAdapter<>(getActivity(),
