@@ -32,7 +32,7 @@
             <!-- 2 Sändknapp -->
             <ImageButton
                 android:layout_weight="1"
-                android:src="@mipmap/ic_file_upload"
+                android:src="@mipmap/ic_upload"
                 android:id="@+id/submit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
                 />
             <!-- 4 textvy 2 adress -->
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="12dp"/>
 
             <View
                 android:layout_marginTop="15dp"
@@ -92,7 +92,7 @@
         <!-- NUMMER 5 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="9">
 
             <!-- 5 Ämnesrad -->
@@ -107,8 +107,6 @@
                 android:maxLength="2000"
                 android:maxLines="4"
                 android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
                 android:hint="Description..."
                 android:gravity="top|left"/>
