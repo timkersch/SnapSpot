@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edit.com.snapspot.R;
+import edit.com.snapspot.models.Spot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +89,8 @@ public class CreateFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri);
+        void onSend(Spot spot);
     }
 
 }

@@ -7,7 +7,6 @@ import java.util.Locale;
 
 import android.location.Location;
 import android.net.Uri;
-import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -17,12 +16,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -31,14 +26,11 @@ import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.api.client.util.DateTime;
@@ -84,13 +76,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-        actionBar = getSupportActionBar();
-
         DbOperations.registerGcm(this);
 
         // Set up the action bar.
-        final ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
@@ -267,7 +256,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         trans.addToBackStack("createNew");
         trans.commit();
         createOpen = true;
-        actionBar.hide();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         Log.d(TAG, "onCreateNew");
     }
 
@@ -277,18 +266,23 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
     @Override
+    public void onSend(Spot spot) {
+        addPOI(spot);
+    }
+
+    @Override
     public void onBackPressed() {
         if (createOpen) {
-            backFromSettingsFragment();
+            backFromCreateFragment();
             return;
         }
         super.onBackPressed();
     }
 
-    private void backFromSettingsFragment() {
+    private void backFromCreateFragment() {
         createOpen = false;
         getFragmentManager().popBackStack();
-        actionBar.show();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     }
 
     /**
