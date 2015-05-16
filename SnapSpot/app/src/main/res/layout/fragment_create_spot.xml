@@ -30,7 +30,7 @@
                 android:layout_height="fill_parent"/>
 
             <!-- 2 Sändknapp -->
-            <TextView
+            <Button
 	            android:text="Submit"
 	            android:gravity="center"
 	            android:textColor="@color/accent"
