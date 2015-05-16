@@ -3,8 +3,7 @@
               xmlns:fab="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_marginBottom="20dp">
+              android:layout_height="match_parent">
 
 	<FrameLayout
 		android:layout_width="fill_parent"
@@ -14,7 +13,8 @@
 		          android:layout_width="match_parent"
 		          android:layout_height="match_parent"
 		          android:divider="@null"
-		          android:dividerHeight="0dp"/>
+		          android:dividerHeight="0dp"
+		          android:padding="20dp"/>
 
 		<TextView android:id="@android:id/empty" android:layout_width="match_parent"
 		          android:layout_height="match_parent" android:gravity="center" />
