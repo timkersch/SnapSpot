@@ -69,7 +69,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                 getActivity().onBackPressed();
             }
         });
-        ImageButton submit = (ImageButton) view.findViewById(R.id.submit_button);
+        Button submit = (Button) view.findViewById(R.id.submit_button);
         submit.setOnClickListener(this);
         description = (EditText) view.findViewById(R.id.cs_description);
         ((MainActivity) getActivity()).getCurrentPlace(new ResultCallback<PlaceLikelihoodBuffer>() {
