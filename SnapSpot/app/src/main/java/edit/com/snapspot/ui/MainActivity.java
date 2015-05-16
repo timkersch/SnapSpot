@@ -33,7 +33,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.api.client.util.DateTime;
+
 
 import edit.com.snapspot.R;
 import edit.com.snapspot.appEngineServices.DbOperations;
@@ -127,7 +127,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-        DbOperations.addSpot(new Spot("namn", "blabla", "adr", System.currentTimeMillis(), 10,10));
+        //DbOperations.addSpot(new Spot("Ottomania", "This is a description", "Street 1, 123 00, Gothenburg", System.currentTimeMillis(), 57.69632f, 11.97077f));
+	    //DbOperations.addSpot(new Spot("Ölstugan Tullen", "This is a description", "Street 2, 321 00, Gothenburg", System.currentTimeMillis(), 57.69930f, 11.94940f));
+	    //DbOperations.addSpot(new Spot("BrewDog Bar", "This is a description", "Street 3, 132 00, Gothenburg", System.currentTimeMillis(), 57.70326f, 11.95895f));
     }
 
     @Override

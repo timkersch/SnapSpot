@@ -2,7 +2,6 @@ package edit.com.snapspot.appEngineServices;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -28,7 +27,7 @@ import java.util.List;
  */
 public class DbOperations {
 
-	// Set if the registration should be LOCAL or global
+	// Set if the registration should be local or global
 	private static final boolean LOCAL = false;
 	private static final String PROJECT_ID = "461803206887";
 
@@ -46,7 +45,6 @@ public class DbOperations {
 				initSpotService();
 				try {
 					spotService.addSpot(spot.getName(), spot.getDescription(), spot.getAddress(), spot.getTimestamp(), spot.getGeoPt()).execute();
-					Log.d("executed", "");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
