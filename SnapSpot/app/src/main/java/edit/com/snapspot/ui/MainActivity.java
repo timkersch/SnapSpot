@@ -24,6 +24,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,7 +46,8 @@ import edit.com.snapspot.models.Spot;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        FeedFragment.OnFragmentInteractionListener, CreateFragment.OnFragmentInteractionListener {
+        FeedFragment.OnFragmentInteractionListener, CreateFragment.OnFragmentInteractionListener,
+        com.google.android.gms.location.LocationListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -70,6 +73,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private final String TAG = "MainActivity";
     private boolean createOpen = false;
     private ActionBar actionBar;
+    private LocationRequest locationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +187,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     @Override
     public void onConnected(Bundle bundle) {
-
+        startLocationUpdates();
     }
 
     @Override
@@ -204,8 +208,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 myLocation = new LatLng(location.getLatitude(),
                         location.getLongitude());
             }
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,
-                    6));
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 6));
         }
     }
 
@@ -239,7 +242,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
     public void removePOI(Spot spot){
-        //DbOperations.deleteSpot(spot);
+        DbOperations.deleteSpot(spot);
     }
 
     @Override
@@ -288,6 +291,26 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+
+    }
+
+    protected void createLocationRequest() {
+        /*locationRequest = new LocationRequest();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);*/
+    }
+
+    protected void startLocationUpdates() {
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, this);
+    }
+
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -311,7 +334,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                             public void onMapReady(GoogleMap googleMap) {
                                 map = googleMap;
                                 map.setMyLocationEnabled(true);
-                                showAllMarkers();
+                                createLocationRequest();
+
+                                map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                                    @Override
+                                    public void onMapLoaded() {
+                                        getPOIs();
+                                    }
+                                });
                             }
                         });
                     }
