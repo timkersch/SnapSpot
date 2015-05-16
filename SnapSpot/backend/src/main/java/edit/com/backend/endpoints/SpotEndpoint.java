@@ -11,6 +11,7 @@ import edit.com.backend.records.SpotRecord;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static edit.com.backend.utils.OfyService.ofy;
 
@@ -23,31 +24,46 @@ import static edit.com.backend.utils.OfyService.ofy;
 @Api(name = "spot", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.com.edit", ownerName = "backend.com.edit", packagePath = ""))
 public class SpotEndpoint {
 
+	private static final Logger log = Logger.getLogger(RegistrationEndpoint.class.getName());
+
 	@ApiMethod(name = "addSpot")
-	public void addSpot(@Named("name") String name, @Named("description") String description,
-	                   @Named("latitude") float latitude, @Named("longitude") float longitude, @Named("date")Date date, @Named("adress") String adress) {
+	public void addSpot(@Named("name") String name,
+	                    @Named("description") String description,
+	                    @Named("adress") String adress,
+	                    @Named("date") Date date,
+	                    GeoPt geoPt) {
 		SpotRecord record = new SpotRecord();
-		record.setGeoPt(new GeoPt(latitude, longitude));
-		record.setDescription(description);
 		record.setName(name);
-		record.setDate(date);
+		record.setDescription(description);
 		record.setAdress(adress);
+		record.setGeoPt(geoPt);
+		record.setDate(date);
 		ofy().save().entity(record).now();
 	}
 
 	@ApiMethod(name = "getSpots")
 	public CollectionResponse<SpotRecord> getSpots() {
+		log.entering("SpotEndpoint", "getSpots");
 		List<SpotRecord> spotRecords = ofy().load().type(SpotRecord.class).list();
 		return CollectionResponse.<SpotRecord>builder().setItems(spotRecords).build();
 	}
 
+	@ApiMethod(name = "test")
+	public void test() {
+		SpotRecord record = new SpotRecord();
+		record.setName("justAname");
+		ofy().save().entity(record).now();
+	}
+
 	@ApiMethod(name = "findSpot")
 	public SpotRecord findSpot(@Named("name") String name) {
+		log.entering("SpotEndpoint", "findSpot");
 		return ofy().load().type(SpotRecord.class).filter("name", name).first().now();
 	}
 
 	@ApiMethod(name = "removeSpot")
 	public void removeSpot(@Named("name") String name) {
+		log.entering("SpotEndpoint", "removeSpot");
 		// TODO remove this spot
 		//ofy().load().type(SpotRecord.class).filter("name", name).first().now();
 	}

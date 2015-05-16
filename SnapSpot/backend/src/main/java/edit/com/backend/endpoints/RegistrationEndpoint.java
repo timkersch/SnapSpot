@@ -25,6 +25,7 @@ public class RegistrationEndpoint {
 	 */
 	@ApiMethod(name = "register")
 	public void registerDevice(@Named("regId") String regId) {
+		log.info("Register device");
 		if (findRecord(regId) != null) {
 			log.info("Device " + regId + " already registered, skipping register");
 			return;
