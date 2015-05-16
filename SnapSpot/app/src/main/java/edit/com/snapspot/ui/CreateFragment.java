@@ -82,6 +82,8 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                 ((TextView) view.findViewById(R.id.name)).setText(name);
                 ((TextView) view.findViewById(R.id.adress)).setText(address);
                 Log.d(TAG, "Place: " + name + " " + address);
+                description.requestFocus();
+                description.setText("");
             }
         });
         return view;

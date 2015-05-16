@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import android.location.Location;
 import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
@@ -48,7 +50,7 @@ import edit.com.snapspot.models.Spot;
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         FeedFragment.OnFragmentInteractionListener, CreateFragment.OnFragmentInteractionListener,
-        com.google.android.gms.location.LocationListener {
+        LocationListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -135,10 +137,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-        //DbOperations.addSpot(new Spot("Ottomania", "This is a description", "Street 1, 123 00, Gothenburg", System.currentTimeMillis(), 57.69632f, 11.97077f));
-	    //DbOperations.addSpot(new Spot("Ölstugan Tullen", "This is a description", "Street 2, 321 00, Gothenburg", System.currentTimeMillis(), 57.69930f, 11.94940f));
-	    //DbOperations.addSpot(new Spot("BrewDog Bar", "This is a description", "Street 3, 132 00, Gothenburg", System.currentTimeMillis(), 57.70326f, 11.95895f));
-        getPOIs();
     }
 
     @Override
@@ -271,6 +269,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
     @Override
+    public void requestRefresh() {
+        getPOIs();
+    }
+
+    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
@@ -278,6 +281,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     public void onSend(Spot spot) {
         addPOI(spot);
+        getPOIs();
     }
 
     @Override

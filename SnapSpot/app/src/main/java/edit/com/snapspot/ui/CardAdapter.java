@@ -60,6 +60,7 @@ public class CardAdapter extends ArrayAdapter<Spot> {
                 @Override
                 public void onClick(View v) {
                     cards.remove(position);
+                    notifyDataSetChanged();
                     Log.d("CardAdapter", "Removing");
                 }
             });
