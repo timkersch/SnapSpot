@@ -2,7 +2,9 @@ package edit.com.snapspot.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +36,7 @@ import edit.com.snapspot.ui.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class FeedFragment extends Fragment implements AbsListView.OnItemClickListener, View.OnClickListener {
+public class FeedFragment extends Fragment implements AbsListView.OnItemClickListener, View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private OnFragmentInteractionListener mListener;
 
@@ -51,6 +53,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
      */
     private CardAdapter mAdapter;
     private List<Spot> cards;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     // TODO: Rename and change types of parameters
     public static FeedFragment newInstance() {
@@ -90,6 +93,18 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         FloatingActionButton floatingButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
         floatingButton.setOnClickListener(this);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        }, 500);
+
+        Log.d(TAG, "onCreateView");
+
         return view;
     }
 
@@ -118,6 +133,9 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
             cards.add(s);
         }
         mAdapter.notifyDataSetChanged();
+        // Disable refreshing
+        swipeRefreshLayout.setRefreshing(false);
+        Log.d(TAG, "updateFeed");
     }
 
     @Override
@@ -140,6 +158,11 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         }
     }
 
+    @Override
+    public void onRefresh() {
+        mListener.requestRefresh();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -154,6 +177,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         // TODO: Update argument type and name
         void onFragmentInteraction(String id);
         void onCreateNew();
+        void requestRefresh();
     }
 
 }

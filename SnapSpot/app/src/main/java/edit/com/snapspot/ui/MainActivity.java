@@ -50,7 +50,7 @@ import edit.com.snapspot.models.Spot;
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
         FeedFragment.OnFragmentInteractionListener, CreateFragment.OnFragmentInteractionListener,
-        LocationListener, SwipeRefreshLayout.OnRefreshListener {
+        LocationListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -79,7 +79,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
 	private Location currentLocation;
 	private LocationRequest locationRequest;
-    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +108,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 actionBar.setSelectedNavigationItem(position);
             }
         });
-
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -242,8 +234,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 showAllMarkers();
                 // Update feed
                 feedFragment.updateFeed(spots);
-                // Disable refreshing
-                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -276,6 +266,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         createOpen = true;
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         Log.d(TAG, "onCreateNew");
+    }
+
+    @Override
+    public void requestRefresh() {
+        getPOIs();
     }
 
     @Override
@@ -322,11 +317,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     protected void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-    }
-
-    @Override
-    public void onRefresh() {
-        getPOIs();
     }
 
     /**
