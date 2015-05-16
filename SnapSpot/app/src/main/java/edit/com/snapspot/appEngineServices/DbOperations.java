@@ -93,9 +93,11 @@ public class DbOperations {
 				try {
 					CollectionResponseSpotRecord record = spotService.getSpots().execute();
 					List<SpotRecord> spots = record.getItems();
-					spotList = new ArrayList<Spot>(spots.size());
-					for(SpotRecord s : spots) {
-						spotList.add(new Spot(s.getName(), s.getDescription(), s.getAdress(), s.getDate(), s.getGeoPt()));
+					if(spots != null) {
+						spotList = new ArrayList<Spot>(spots.size());
+						for (SpotRecord s : spots) {
+							spotList.add(new Spot(s.getName(), s.getDescription(), s.getAdress(), s.getDate(), s.getGeoPt()));
+						}
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
