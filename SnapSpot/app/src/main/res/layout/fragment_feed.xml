@@ -20,11 +20,11 @@
 			android:layout_height="fill_parent"
 			android:gravity="bottom">
 			<!-- TODO add license and credit -->
-			<!--fab:fab_icon="@drawable/ic_fab_star"-->
 			<com.getbase.floatingactionbutton.FloatingActionButton
 				android:id="@+id/pink_icon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				fab:fab_icon="@mipmap/ic_control_point_white"
 				fab:fab_colorNormal="@color/accent"
 				fab:fab_colorPressed="@color/accent"
 				fab:fab_labelsPosition="right"
