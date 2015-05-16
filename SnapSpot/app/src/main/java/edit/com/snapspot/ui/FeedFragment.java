@@ -50,7 +50,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
      * Views.
      */
     private CardAdapter mAdapter;
-    private List<Card> cards;
+    private List<Spot> cards;
 
     // TODO: Rename and change types of parameters
     public static FeedFragment newInstance() {
@@ -71,9 +71,6 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         // TODO: Change Adapter to display your content
 
         cards = new ArrayList<>();
-        Spot tmp = new Spot("Test", "Desc", "Skaraholm 3", System.currentTimeMillis(),(float)55.2, (float)55.2);
-        cards.add(new Card(tmp));
-        cards.add(new Card(tmp));
 
         mAdapter = new CardAdapter(getActivity(), R.layout.card_layout, cards);
     }
@@ -118,7 +115,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         // Update the adapter with new spots
         cards.clear();
         for(Spot s : spots){
-            cards.add(new Card(s));
+            cards.add(s);
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -128,7 +125,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(cards.get(position).getSpot().getName());
+            mListener.onFragmentInteraction(cards.get(position).getName());
             Log.d(TAG, "OnItemClick");
         }
     }

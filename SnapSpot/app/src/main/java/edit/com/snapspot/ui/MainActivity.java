@@ -27,11 +27,13 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -203,14 +205,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
     public void showAllMarkers(){
-        if(markers.isEmpty()){
-            Location location = map.getMyLocation();
-            LatLng myLocation = new LatLng(0, 0);
-            if (location != null) {
-                myLocation = new LatLng(location.getLatitude(),
-                        location.getLongitude());
+        if(!markers.isEmpty()){
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (Marker marker : markers) {
+                builder.include(marker.getPosition());
             }
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 6));
+            LatLngBounds bounds = builder.build();
+
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
+            map.moveCamera(cu);
         }
     }
 

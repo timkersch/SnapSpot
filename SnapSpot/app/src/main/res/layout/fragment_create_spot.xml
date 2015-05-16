@@ -1,58 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-    android:background="#ffffff"
+                android:background="#e5e5e3"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <!--NUMMER 1 -->
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
+
+
         <!-- NUMMER 2 -->
-        <GridLayout
-
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:rowCount="1"
-            android:columnCount="3"
-            android:background="#e5e5e3">
-
+            android:layout_height="50dp"
+            android:id="@+id/header"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp">
 
             <!-- 1 Kryssknapp -->
             <ImageButton
+                android:layout_weight="1"
                 android:id="@+id/cancel_button"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="left"
+                android:background="@null"
+                android:src="@mipmap/ic_remove_nc"/>
 
-                android:src="@mipmap/ic_remove_nc"
-
-                />
+            <TextView
+                android:layout_weight="8"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"/>
 
             <!-- 2 Sändknapp -->
             <ImageButton
+                android:layout_weight="1"
                 android:src="@mipmap/ic_file_upload"
                 android:id="@+id/submit_button"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginRight="10dp"
-
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
                 android:layout_gravity="right"
-                android:layout_columnWeight="14"
+                android:background="@null"
+                android:layout_columnWeight="14"/>
 
-                />
-
-        </GridLayout>
+        </LinearLayout>
 
         <!-- 5 Ämnesrad -->
-
-
-    </LinearLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
@@ -62,7 +54,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="#fff">
 
         <!-- NUMMER 4 -->
         <LinearLayout
