@@ -35,10 +35,11 @@
         </LinearLayout>
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="400dp"
+            android:layout_height="340dp"
             android:layout_below="@+id/header"
-            android:src="@drawable/sample_image"
-            android:id="@+id/image"/>
+            android:src="@drawable/image_sample"
+            android:id="@+id/image"
+	        android:layout_margin="0dp"/>
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
