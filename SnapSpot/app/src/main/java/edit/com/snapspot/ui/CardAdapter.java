@@ -1,5 +1,6 @@
 package edit.com.snapspot.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,19 +34,32 @@ public class CardAdapter extends ArrayAdapter<Card> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = new ViewHolder();
-        holder.title = (TextView) convertView.findViewById(R.id.title);
-        holder.description = (TextView) convertView.findViewById(R.id.description);
-        convertView.setTag(holder);
+        ViewHolder viewHolder;
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.card_layout, parent, false);
-        TextView title = (TextView) rowView.findViewById(R.id.title);
-        TextView description = (TextView) rowView.findViewById(R.id.description);
-        title.setText(cards.get(position).getSpot().getName());
-        description.setText(cards.get(position).getSpot().getDescription());
-        return rowView;
+        if(convertView == null){
+
+            // inflate the layout
+            LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+            convertView = inflater.inflate(R.layout.card_layout, parent, false);
+
+            // well set up the ViewHolder
+            viewHolder = new ViewHolder();
+            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
+            viewHolder.description = (TextView) convertView.findViewById(R.id.description);
+
+            // store the holder with the view.
+            convertView.setTag(viewHolder);
+        }else{
+            // we've just avoided calling findViewById() on resource everytime
+            // just use the viewHolder
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+
+        // get the TextView from the ViewHolder and then set the text (item name) and tag (item ID) values
+        viewHolder.title.setText(cards.get(position).getSpot().getName());
+        viewHolder.description.setTag(cards.get(position).getSpot().getDescription());
+
+        return convertView;
     }
 
 
