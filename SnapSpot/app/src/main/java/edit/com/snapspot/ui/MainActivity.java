@@ -43,6 +43,7 @@ import com.google.android.gms.maps.model.Marker;
 import edit.com.snapspot.R;
 import edit.com.snapspot.appEngineServices.DbRegistration;
 import edit.com.snapspot.appEngineServices.POICallback;
+import edit.com.snapspot.models.Spot;
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, FeedFragment.OnFragmentInteractionListener {
@@ -206,9 +207,17 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         // Todo: Use callback to get POIs
     }
 
+    public void addPOI(Spot spot){
+
+    }
+
+    public void removePOI(Spot spot){
+
+    }
+
     @Override
     public void onFragmentInteraction(String id) {
-
+        
     }
 
     /**
