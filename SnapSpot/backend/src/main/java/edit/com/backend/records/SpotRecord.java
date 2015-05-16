@@ -1,9 +1,12 @@
 package edit.com.backend.records;
 
 import com.google.appengine.api.datastore.GeoPt;
+import com.google.appengine.repackaged.com.google.api.client.util.DateTime;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+
+import java.util.Date;
 
 /**
  * Created by: Tim Kerschbaumer
@@ -21,6 +24,7 @@ public class SpotRecord {
 	private String name;
 	private GeoPt geoPt;
 	private String description;
+	private Date date;
 
 	public GeoPt getGeoPt() {
 		return geoPt;
@@ -44,6 +48,14 @@ public class SpotRecord {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Date getDate() {
+		return date;
 	}
 
 
