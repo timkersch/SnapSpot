@@ -93,7 +93,7 @@ public class DbOperations {
 			@Override
 			protected void onPostExecute(List<Spot> spots) {
 				// Callback
-				callback.onPOIready(spots);
+				callback.onPOIReady(spots);
 			}
 
 		}.execute();
