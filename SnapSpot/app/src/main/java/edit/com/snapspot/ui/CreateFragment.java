@@ -71,6 +71,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         });
         ImageButton submit = (ImageButton) view.findViewById(R.id.submit_button);
         submit.setOnClickListener(this);
+        description = (EditText) view.findViewById(R.id.csdescription);
         ((MainActivity) getActivity()).getCurrentPlace(new ResultCallback<PlaceLikelihoodBuffer>() {
             @Override
             public void onResult(PlaceLikelihoodBuffer placeLikelihoods) {
