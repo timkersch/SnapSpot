@@ -25,12 +25,13 @@ public class SpotEndpoint {
 
 	@ApiMethod(name = "addSpot")
 	public void addSpot(@Named("name") String name, @Named("description") String description,
-	                   @Named("latitude") float latitude, @Named("longitude") float longitude, @Named("date")Date date) {
+	                   @Named("latitude") float latitude, @Named("longitude") float longitude, @Named("date")Date date, @Named("adress") String adress) {
 		SpotRecord record = new SpotRecord();
 		record.setGeoPt(new GeoPt(latitude, longitude));
 		record.setDescription(description);
 		record.setName(name);
 		record.setDate(date);
+		record.setAdress(adress);
 		ofy().save().entity(record).now();
 	}
 

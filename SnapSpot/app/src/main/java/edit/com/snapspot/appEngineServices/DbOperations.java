@@ -44,7 +44,7 @@ public class DbOperations {
 			protected Void doInBackground(Void... params) {
 				initSpotService();
 				try {
-					spotService.addSpot(spot.getName(), spot.getDescription(), spot.getLatitude(), spot.getLongitude(), spot.getTimestamp());
+					spotService.addSpot(spot.getName(), spot.getDescription(), spot.getLatitude(), spot.getLongitude(), spot.getTimestamp(), spot.getAddress());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -82,7 +82,7 @@ public class DbOperations {
 					List<SpotRecord> spots = record.getItems();
 					spotList = new ArrayList<Spot>(spots.size());
 					for(SpotRecord s : spots) {
-						spotList.add(new Spot(s.getGeoPt().getLatitude(), s.getGeoPt().getLongitude(), s.getName(), s.getDescription(), s.getDate()));
+						spotList.add(new Spot(s.getGeoPt().getLatitude(), s.getGeoPt().getLongitude(), s.getName(), s.getDescription(), s.getAdress(), s.getDate()));
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
