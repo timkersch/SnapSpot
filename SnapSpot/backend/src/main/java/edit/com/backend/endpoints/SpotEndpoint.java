@@ -43,29 +43,18 @@ public class SpotEndpoint {
 
 	@ApiMethod(name = "getSpots")
 	public CollectionResponse<SpotRecord> getSpots() {
-		log.entering("SpotEndpoint", "getSpots");
 		List<SpotRecord> spotRecords = ofy().load().type(SpotRecord.class).list();
 		return CollectionResponse.<SpotRecord>builder().setItems(spotRecords).build();
 	}
 
-	@ApiMethod(name = "test")
-	public void test() {
-		SpotRecord record = new SpotRecord();
-		record.setName("justAname");
-		ofy().save().entity(record).now();
-	}
-
-	@ApiMethod(name = "findSpot")
-	public SpotRecord findSpot(@Named("name") String name) {
-		log.entering("SpotEndpoint", "findSpot");
+	@ApiMethod(name = "getSpot")
+	public SpotRecord getSpot(@Named("name") String name) {
 		return ofy().load().type(SpotRecord.class).filter("name", name).first().now();
 	}
 
 	@ApiMethod(name = "removeSpot")
 	public void removeSpot(@Named("name") String name) {
-		log.entering("SpotEndpoint", "removeSpot");
-		// TODO remove this spot
-		//ofy().load().type(SpotRecord.class).filter("name", name).first().now();
+		ofy().delete().entity(name);
 	}
 
 	private void sendMessage(String message) {
