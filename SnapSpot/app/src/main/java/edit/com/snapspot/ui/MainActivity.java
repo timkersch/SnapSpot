@@ -1,7 +1,11 @@
 package edit.com.snapspot.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
+import android.location.Location;
+import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -20,15 +24,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 
 import edit.com.snapspot.R;
 import edit.com.snapspot.appEngineServices.DbRegistration;
 import edit.com.snapspot.appEngineServices.POICallback;
 
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, FeedFragment.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -48,6 +65,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private SupportMapFragment mapFragment;
     private GoogleMap map;
     private FeedFragment feedFragment;
+    private List<Marker> markers;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +108,29 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
+
+        markers = new ArrayList<>();
+
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -129,6 +169,48 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    public void getCurrentPlace(ResultCallback<PlaceLikelihoodBuffer> callback){
+        PendingResult<PlaceLikelihoodBuffer> result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
+        result.setResultCallback(callback);
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    public void showAllMarkers(){
+        if(markers.isEmpty()){
+            Location location = map.getMyLocation();
+            LatLng myLocation = new LatLng(0, 0);
+            if (location != null) {
+                myLocation = new LatLng(location.getLatitude(),
+                        location.getLongitude());
+            }
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation,
+                    6));
+        }
+    }
+
+    public void getPOIs(){
+        // Todo: Use callback to get POIs
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -144,12 +226,20 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
-                case 0:
+                case 1:
                     if(mapFragment == null){
                         mapFragment = SupportMapFragment.newInstance();
+                        mapFragment.getMapAsync(new OnMapReadyCallback() {
+                            @Override
+                            public void onMapReady(GoogleMap googleMap) {
+                                map = googleMap;
+                                map.setMyLocationEnabled(true);
+                                showAllMarkers();
+                            }
+                        });
                     }
                     return mapFragment;
-                case 1:
+                case 0:
                     if(feedFragment == null){
                         feedFragment = new FeedFragment();
                     }
