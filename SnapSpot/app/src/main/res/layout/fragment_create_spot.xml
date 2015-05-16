@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-                android:background="#e5e5e3"
+              android:background="#e5e5e3"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
 
         <!-- NUMMER 2 -->
         <LinearLayout
@@ -22,7 +21,6 @@
                 android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:layout_gravity="left"
                 android:background="@null"
                 android:src="@mipmap/ic_remove_nc"/>
 
@@ -37,10 +35,8 @@
                 android:src="@mipmap/ic_file_upload"
                 android:id="@+id/submit_button"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_gravity="right"
-                android:background="@null"
-                android:layout_columnWeight="14"/>
+                android:layout_height="wrap_content"
+                android:background="@null"/>
 
         </LinearLayout>
 
@@ -64,14 +60,12 @@
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="80dp"
-
             android:layout_weight="1">
 
             <!-- 3 textvy 1 name -->
             <TextView
                 android:text="name"
                 android:textSize="16dp"
-
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,23 +75,17 @@
             <TextView
                 android:text="adress"
                 android:textSize="16dp"
-
-
                 android:id="@+id/adress"
                 android:layout_marginTop="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-
-
-                />
+                android:layout_marginLeft="10dp"/>
 
             <View
                 android:layout_marginTop="15dp"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="#9b9b99"
-                />
+                android:background="#9b9b99"/>
         </LinearLayout>
 
 
@@ -113,7 +101,8 @@
                 android:id="@+id/cs_description"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLength="2000"
                 android:maxLines="4"
