@@ -8,8 +8,10 @@ import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import edit.com.backend.registration.Registration;
+import edit.com.snapspot.models.Spot;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by: Tim Kerschbaumer
@@ -20,7 +22,7 @@ import java.io.IOException;
 
 /** This class is used for registration of the device to GCM.
  */
-public class DbRegistration {
+public class DbOperations {
 
 	// Set if the registration should be LOCAL or global
 	private static final boolean LOCAL = false;
@@ -28,6 +30,16 @@ public class DbRegistration {
 
 	private static Registration regService;
 	private static GoogleCloudMessaging gcm;
+
+	public static void addSpot(Spot spot) {
+	}
+
+	public static void deleteSpot(Spot spot) {
+	}
+
+	public static List<Spot> getSpots() {
+		return null;
+	}
 
 	/** Register this device for GCM
 	 * @param context

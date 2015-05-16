@@ -21,23 +21,10 @@ import javax.inject.Named;
 
 import static edit.com.backend.utils.OfyService.ofy;
 
-/**
- * An endpoint to send messages to devices registered with the backend
- * <p/>
- * For more information, see
- * https://developers.google.com/appengine/docs/java/endpoints/
- * <p/>
- * NOTE: This endpoint does not use any form of authorization or
- * authentication! If this app is deployed, anyone can access this endpoint! If
- * you'd like to add authentication, take a look at the documentation.
- */
 @Api(name = "messaging", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.com.edit", ownerName = "backend.com.edit", packagePath = ""))
 public class MessagingEndpoint {
 	private static final Logger log = Logger.getLogger(MessagingEndpoint.class.getName());
 
-	/**
-	 * Api Keys can be obtained from the google cloud console
-	 */
 	private static final String API_KEY = System.getProperty("gcm.api.key");
 
 	/**
