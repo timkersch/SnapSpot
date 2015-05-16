@@ -8,6 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
+import com.google.android.gms.maps.model.LatLng;
 
 import edit.com.snapspot.R;
 import edit.com.snapspot.models.Spot;
@@ -20,10 +29,13 @@ import edit.com.snapspot.models.Spot;
  * Use the {@link CreateFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateFragment extends Fragment {
+public class CreateFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private final String TAG = "CreateFragment";
+    private String name, address;
+    private LatLng location;
+    private EditText description;
 
     /**
      * Use this factory method to create a new instance of
@@ -49,7 +61,28 @@ public class CreateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_spot, container, false);
+        final View view = inflater.inflate(R.layout.fragment_create_spot, container, false);
+        ImageButton cancel = (ImageButton) view.findViewById(R.id.cancel_button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+        ImageButton submit = (ImageButton) view.findViewById(R.id.submit_button);
+        submit.setOnClickListener(this);
+        ((MainActivity) getActivity()).getCurrentPlace(new ResultCallback<PlaceLikelihoodBuffer>() {
+            @Override
+            public void onResult(PlaceLikelihoodBuffer placeLikelihoods) {
+                Place best = placeLikelihoods.get(0).getPlace();
+                name = best.getName().toString();
+                address = best.getAddress().toString();
+                location = best.getLatLng();
+                ((TextView) view.findViewById(R.id.name)).setText(name);
+                ((TextView) view.findViewById(R.id.adress)).setText(address);
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -75,6 +108,13 @@ public class CreateFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Spot spot = new Spot(name, description.getText().toString(), address,
+                System.currentTimeMillis(), (float)location.latitude, (float)location.longitude);
+        mListener.onSend(spot);
     }
 
     /**
