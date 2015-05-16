@@ -127,7 +127,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-        DbOperations.addSpot(new Spot("namn", "blabla", "adr", System.currentTimeMillis(), 10,10));
+        getPOIs();
     }
 
     @Override
