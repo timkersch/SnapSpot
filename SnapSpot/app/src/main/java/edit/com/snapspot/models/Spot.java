@@ -7,16 +7,16 @@ package edit.com.snapspot.models;
  * Time: 14:19
  */
 
-import java.util.Date;
+import com.google.api.client.util.DateTime;
 
 /** This class represents a spot.
  */
 public class Spot {
     private float latitude, longitude;
     private String name, description, address;
-    private Date timestamp;
+    private DateTime timestamp;
 
-    public Spot(float latitude, float longitude, String name, String description, String address, Date timestamp){
+    public Spot(float latitude, float longitude, String name, String description, String address, DateTime timestamp){
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
@@ -45,7 +45,7 @@ public class Spot {
         return address;
     }
 
-    public Date getTimestamp(){
+    public DateTime getTimestamp(){
         return timestamp;
     }
 
