@@ -4,6 +4,7 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import edit.com.backend.records.RegistrationRecord;
+import edit.com.backend.records.SpotRecord;
 
 /**
  * Objectify service wrapper so we can statically register our persistence classes
@@ -13,7 +14,7 @@ public class OfyService {
 
 	static {
 		factory().register(RegistrationRecord.class);
-		//factory().register(SpotsRecord.class);
+		factory().register(SpotRecord.class);
 	}
 
 	public static Objectify ofy() {

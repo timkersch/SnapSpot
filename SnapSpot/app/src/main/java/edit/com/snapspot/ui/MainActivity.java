@@ -14,14 +14,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -41,9 +38,11 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 
 import edit.com.snapspot.R;
-import edit.com.snapspot.appEngineServices.DbRegistration;
+import edit.com.snapspot.appEngineServices.DbOperations;
 import edit.com.snapspot.appEngineServices.POICallback;
+
 import edit.com.snapspot.models.Spot;
+
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, FeedFragment.OnFragmentInteractionListener {
@@ -74,7 +73,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DbRegistration.registerGcm(this);
+        DbOperations.registerGcm(this);
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
