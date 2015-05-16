@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import edit.com.snapspot.R;
 import edit.com.snapspot.appEngineServices.DbRegistration;
@@ -44,7 +45,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      */
     ViewPager mViewPager;
 
-    private MapFragment mapFragment;
+    private SupportMapFragment mapFragment;
     private GoogleMap map;
     private FeedFragment feedFragment;
 
@@ -144,10 +145,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch(position){
                 case 0:
-                    if(mapFragment != null){
-                        mapFragment = MapFragment.newInstance();
+                    if(mapFragment == null){
+                        mapFragment = SupportMapFragment.newInstance();
                     }
-                    return null;
+                    return mapFragment;
+                case 1:
+                    if(feedFragment == null){
+                        feedFragment = new FeedFragment();
+                    }
+                    return feedFragment;
             }
             return null;
         }
