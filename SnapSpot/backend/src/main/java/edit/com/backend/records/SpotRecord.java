@@ -24,7 +24,7 @@ public class SpotRecord {
 
 	private GeoPt geoPt;
 	private String description;
-	private Date date;
+	@Index private Date date;
 
 	public String getAdress() {
 		return adress;
