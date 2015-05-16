@@ -25,6 +25,14 @@ public class Spot {
         this.timestamp = timestamp;
     }
 
+    public Spot(float latitude, float longitude, String name, String description, DateTime timestamp){
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.name = name;
+        this.description = description;
+        this.timestamp = timestamp;
+    }
+
     public float getLatitude() {
         return latitude;
     }

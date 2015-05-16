@@ -46,6 +46,7 @@ public class CardAdapter extends ArrayAdapter<Card> {
             viewHolder = new ViewHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.description = (TextView) convertView.findViewById(R.id.description);
+            viewHolder.position = position;
 
             // store the holder with the view.
             convertView.setTag(viewHolder);
