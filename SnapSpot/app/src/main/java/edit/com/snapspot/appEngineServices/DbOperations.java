@@ -2,6 +2,7 @@ package edit.com.snapspot.appEngineServices;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -44,7 +45,8 @@ public class DbOperations {
 			protected Void doInBackground(Void... params) {
 				initSpotService();
 				try {
-					spotService.addSpot(spot.getName(), spot.getDescription(), spot.getLatitude(), spot.getLongitude(), spot.getTimestamp(), spot.getAddress());
+					spotService.addSpot(spot.getName(), spot.getDescription(), spot.getAddress(), spot.getTimestamp(), spot.getGeoPt()).execute();
+					Log.d("executed", "");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -62,7 +64,7 @@ public class DbOperations {
 			protected Void doInBackground(Void... params) {
 				initSpotService();
 				try {
-					spotService.removeSpot(spot.getName());
+					spotService.removeSpot(spot.getName()).execute();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -82,7 +84,7 @@ public class DbOperations {
 					List<SpotRecord> spots = record.getItems();
 					spotList = new ArrayList<Spot>(spots.size());
 					for(SpotRecord s : spots) {
-						spotList.add(new Spot(s.getGeoPt().getLatitude(), s.getGeoPt().getLongitude(), s.getName(), s.getDescription(), s.getAdress(), s.getDate()));
+						spotList.add(new Spot(s.getName(), s.getDescription(), s.getAdress(), s.getDate(), s.getGeoPt()));
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -156,7 +158,7 @@ public class DbOperations {
 			if(LOCAL) {
 				// Code to run on LOCAL machine
 				builder = new Registration.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
-						.setRootUrl("http://localhost:8080/_ah/api")
+						.setRootUrl("http://10.0.2.2:8080/_ah/api")
 						.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
 							@Override
 							public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {

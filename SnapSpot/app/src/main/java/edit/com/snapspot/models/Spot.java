@@ -8,42 +8,48 @@ package edit.com.snapspot.models;
  */
 
 import com.google.api.client.util.DateTime;
+import edit.com.backend.spot.model.GeoPt;
 
 /** This class represents a spot.
  */
 public class Spot {
-    private float latitude, longitude;
+    private GeoPt geoPt;
     private String name, description, address;
     private DateTime timestamp;
 
-    public Spot(float latitude, float longitude, String name, String description, String address, DateTime timestamp){
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.name = name;
-        this.description = description;
-        this.address = address;
-        this.timestamp = timestamp;
-    }
+    public Spot(String name, String description, String address, long timeInMilliseconds, float latitude, float longitude){
+		this.geoPt = new GeoPt();
+		geoPt.setLatitude(latitude);
+		geoPt.setLongitude(longitude);
+		this.name = name;
+		this.description = description;
+		this.address = address;
+		this.timestamp = new DateTime(timeInMilliseconds);
+	}
 
-    public Spot(float latitude, float longitude, String name, String description, DateTime timestamp){
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.name = name;
-        this.description = description;
-        this.timestamp = timestamp;
-    }
+	public Spot(String name, String description, String address, DateTime dateTime, GeoPt geoPt){
+		this.geoPt = geoPt;
+		this.name = name;
+		this.description = description;
+		this.address = address;
+		this.timestamp = dateTime;
+	}
 
     public float getLatitude() {
-        return latitude;
+        return geoPt.getLatitude();
     }
 
     public float getLongitude() {
-        return longitude;
+        return geoPt.getLongitude();
     }
 
     public String getName() {
         return name;
     }
+
+	public GeoPt getGeoPt() {
+		return geoPt;
+	}
 
     public String getDescription() {
         return description;

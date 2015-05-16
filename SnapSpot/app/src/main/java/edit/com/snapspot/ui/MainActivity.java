@@ -121,16 +121,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-
-        // Operations
-        DbOperations.registerGcm(getApplicationContext());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
-        DbOperations.addSpot(new Spot(0, 0, "Hej", "Test", "Krona", new DateTime(new Date())));
+        DbOperations.addSpot(new Spot("namn", "blabla", "adr", System.currentTimeMillis(), 10,10));
     }
 
     @Override
@@ -239,13 +236,13 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
     public void removePOI(Spot spot){
-        DbOperations.deleteSpot(spot);
+        //DbOperations.deleteSpot(spot);
     }
 
     @Override
     public void onFragmentInteraction(String id) {
         // Insert id (name) and delete
-        removePOI(new Spot(0, 0, id, "", "", null));
+        //removePOI(new Spot(0, 0, id, "", "", null));
     }
 
     /**
