@@ -18,9 +18,9 @@ import java.util.Date;
 public class SpotRecord {
 
 	@Id
+	@Index
 	Long id;
 
-	@Index
 	private String name;
 	private GeoPt geoPt;
 	private String description;

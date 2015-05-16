@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import edit.com.snapspot.R;
+import edit.com.snapspot.models.Spot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +23,7 @@ import edit.com.snapspot.R;
 public class CreateFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private final String TAG = "CreateFragment";
 
     /**
      * Use this factory method to create a new instance of
@@ -59,6 +62,7 @@ public class CreateFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Log.d(TAG, "Attach");
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -85,7 +89,8 @@ public class CreateFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(Uri uri);
+        void onSend(Spot spot);
     }
 
 }
