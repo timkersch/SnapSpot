@@ -242,7 +242,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     public void onFragmentInteraction(String id) {
         // Insert id (name) and delete
-        removePOI(new Spot(0, 0, id, ""));
+        removePOI(new Spot(0, 0, id, "", "", null));
     }
 
     /**
