@@ -11,4 +11,10 @@ package edit.com.snapspot.models;
  */
 public class Spot {
 	// TODO add attributes and methods for spots
+	/* Attributes:
+	Location = Place
+	Name = Place
+	Description = Place
+	Hard coded picture
+	 */
 }

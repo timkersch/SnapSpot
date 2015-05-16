@@ -1,0 +1,13 @@
+Datapunkter:
+
+Ottomania
+Latitude 	Longitude
+57.69632 	11.97077
+
+Ölstugan Tullen:
+Latitude 	Longitude
+57.69930 	11.94940
+
+BrewDog Bar
+Latitude 	Longitude
+57.70326 	11.95895
