@@ -18,10 +18,10 @@ import java.util.Date;
 public class SpotRecord {
 
 	@Id
-	@Index
 	Long id;
 
-	private String name;
+	@Index private String name;
+
 	private GeoPt geoPt;
 	private String description;
 	private Date date;

@@ -33,7 +33,6 @@ public class RegistrationEndpoint {
 		RegistrationRecord record = new RegistrationRecord();
 		record.setRegId(regId);
 		ofy().save().entity(record).now();
-		sendMessage(regId);
 	}
 
 	/**
@@ -65,14 +64,6 @@ public class RegistrationEndpoint {
 
 	private RegistrationRecord findRecord(String regId) {
 		return ofy().load().type(RegistrationRecord.class).filter("regId", regId).first().now();
-	}
-
-	private void sendMessage(String message) {
-		try {
-			new MessagingEndpoint().sendMessage(message);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 }
