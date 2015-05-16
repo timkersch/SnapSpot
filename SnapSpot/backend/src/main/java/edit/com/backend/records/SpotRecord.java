@@ -26,6 +26,16 @@ public class SpotRecord {
 	private String description;
 	private Date date;
 
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+	private String adress;
+
 	public GeoPt getGeoPt() {
 		return geoPt;
 	}
