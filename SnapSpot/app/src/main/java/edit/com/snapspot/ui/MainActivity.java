@@ -209,21 +209,26 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public void getPOIs(){
         // Todo: Use callback to get POIs
         //DbOperations.
-        List<Spot> spots = new ArrayList<>(); //TODO get from backend
-        // Clear all markers
-        map.clear();
-        // Insert new markers
-        for(Spot s : spots){
-            Marker m = map.addMarker(new MarkerOptions()
-                    .position(new LatLng(s.getLatitude(), s.getLongitude()))
-                    .title(s.getName())
-                    .snippet(s.getDescription()));
-            markers.add(m);
-        }
-        // Show markers
-        showAllMarkers();
-        // Update feed
-        feedFragment.updateFeed(spots);
+        DbOperations.getSpots(new POICallback() {
+            @Override
+            public void onPOIReady(List<Spot> spots) {
+                // Clear all markers
+                map.clear();
+                // Insert new markers
+                for (Spot s : spots) {
+                    Marker m = map.addMarker(new MarkerOptions()
+                            .position(new LatLng(s.getLatitude(), s.getLongitude()))
+                            .title(s.getName())
+                            .snippet(s.getDescription()));
+                    markers.add(m);
+                }
+                // Show markers
+                showAllMarkers();
+                // Update feed
+                feedFragment.updateFeed(spots);
+            }
+        });
+
     }
 
     public void addPOI(Spot spot){

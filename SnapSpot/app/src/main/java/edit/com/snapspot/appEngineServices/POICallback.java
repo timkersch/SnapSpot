@@ -9,5 +9,5 @@ import edit.com.snapspot.models.Spot;
  */
 public interface POICallback {
 
-    void onPOIready(List<Spot> spots);
+    void onPOIReady(List<Spot> spots);
 }

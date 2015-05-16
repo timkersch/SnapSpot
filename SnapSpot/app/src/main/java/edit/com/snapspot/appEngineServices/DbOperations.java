@@ -71,7 +71,7 @@ public class DbOperations {
 		}.execute();
 	}
 
-	public static void getSpots() {
+	public static void getSpots(final POICallback callback) {
 		new AsyncTask<Void, Void, List<Spot>>() {
 			@Override
 			protected List<Spot> doInBackground(Void... params) {
@@ -93,6 +93,7 @@ public class DbOperations {
 			@Override
 			protected void onPostExecute(List<Spot> spots) {
 				// Callback
+				callback.onPOIready(spots);
 			}
 
 		}.execute();
