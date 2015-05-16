@@ -11,6 +11,7 @@
         >
         <!-- NUMMER 2 -->
         <GridLayout
+
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:rowCount="1"
@@ -25,8 +26,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:layout_marginLeft="10dp"
+
                 android:src="@mipmap/ic_remove_nc"
 
                 />
@@ -36,10 +36,11 @@
                 android:src="@mipmap/ic_file_upload"
                 android:id="@+id/submit_button"
                 android:layout_marginTop="3dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="3dp"
                 android:layout_marginRight="10dp"
-                android:adjustViewBounds="true"
-                android:scaleType="center"
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
 
                 android:layout_gravity="right"
                 android:layout_columnWeight="14"
