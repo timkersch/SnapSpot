@@ -189,7 +189,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     @Override
     public void onConnected(Bundle bundle) {
-        startLocationUpdates();
+        //startLocationUpdates();
     }
 
     @Override
