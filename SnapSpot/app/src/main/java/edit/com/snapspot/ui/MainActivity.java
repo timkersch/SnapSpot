@@ -225,7 +225,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     public void getPOIs(){
         // Todo: Use callback to get POIs
-        DbOperations.getSpots(this, new POICallback() {
+        DbOperations.getSpots(new POICallback() {
             @Override
             public void onPOIReady(List<Spot> spots) {
                 // Clear all markers

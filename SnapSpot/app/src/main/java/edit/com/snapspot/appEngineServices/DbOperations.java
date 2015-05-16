@@ -72,19 +72,8 @@ public class DbOperations {
 		}.execute();
 	}
 
-	public static void getSpots(final Context context, final POICallback callback) {
+	public static void getSpots(final POICallback callback) {
 		new AsyncTask<Void, Void, List<Spot>>() {
-			ProgressDialog spinner = null;
-
-			@Override
-			protected void onPreExecute() {
-				if(context != null) {
-					spinner = new ProgressDialog(context, ProgressDialog.STYLE_SPINNER);
-					spinner.setMessage("Loading your spots...");
-					spinner.setCancelable(false);
-					spinner.show();
-				}
-			}
 
 			@Override
 			protected List<Spot> doInBackground(Void... params) {
@@ -107,10 +96,6 @@ public class DbOperations {
 
 			@Override
 			protected void onPostExecute(List<Spot> spots) {
-				// Callback
-				if(context != null) {
-					spinner.dismiss();
-				}
 				callback.onPOIReady(spots);
 			}
 
