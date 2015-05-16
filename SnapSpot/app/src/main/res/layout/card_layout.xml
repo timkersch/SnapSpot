@@ -14,7 +14,7 @@
 		android:layout_marginRight="20dp"
 		android:layout_marginTop="20dp">
 		card_view:cardUseCompatPadding="true"
-		android:elevation="4dp">
+		android:elevation="5dp">
 
 		<RelativeLayout
 			android:layout_width="match_parent"
@@ -68,7 +68,7 @@
 					android:layout_height="wrap_content"
 					android:text="Time"
 					android:gravity="center_vertical"
-					android:textSize="8dp"
+					android:textSize="10dp"
 					android:layout_marginBottom="5dp"/>
 				<TextView
 					android:id="@+id/description"
