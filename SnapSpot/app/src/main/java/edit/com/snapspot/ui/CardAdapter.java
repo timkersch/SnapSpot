@@ -2,6 +2,7 @@ package edit.com.snapspot.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,10 @@ public class CardAdapter extends ArrayAdapter<Card> {
     private List<Card> cards;
 
     public CardAdapter(Context context, int resource, List<Card> cards) {
-        super(context, resource);
+        super(context, resource, cards);
         this.cards = cards;
         this.context = context;
+        Log.d("CardAdapter", "Hej");
     }
 
     static class ViewHolder {
@@ -58,7 +60,13 @@ public class CardAdapter extends ArrayAdapter<Card> {
 
         // get the TextView from the ViewHolder and then set the text (item name) and tag (item ID) values
         viewHolder.title.setText(cards.get(position).getSpot().getName());
-        viewHolder.description.setTag(cards.get(position).getSpot().getDescription());
+        viewHolder.description.setText(cards.get(position).getSpot().getDescription());
+
+        /*LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View rowView = inflater.inflate(R.layout.card_layout, parent, false);
+        TextView textView = (TextView) rowView.findViewById(R.id.title);
+        textView.setText(cards.get(position).getSpot().getName());
+        Log.d("CardAdapter", "Adding card: " + position);*/
 
         return convertView;
     }

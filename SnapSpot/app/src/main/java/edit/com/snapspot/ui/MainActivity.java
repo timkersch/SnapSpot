@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.location.Location;
+import android.net.Uri;
 import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -48,7 +49,8 @@ import edit.com.snapspot.models.Spot;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, FeedFragment.OnFragmentInteractionListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        FeedFragment.OnFragmentInteractionListener, CreateFragment.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -66,6 +68,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     ViewPager mViewPager;
 
     private SupportMapFragment mapFragment;
+    private CreateFragment createFragment;
     private GoogleMap map;
     private FeedFragment feedFragment;
     private List<Marker> markers;
@@ -121,9 +124,6 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
-
-        // Operations
-        DbOperations.registerGcm(getApplicationContext());
     }
 
     @Override
@@ -248,6 +248,21 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         removePOI(new Spot(0, 0, id, "", "", null));
     }
 
+    @Override
+    public void onCreateNew() {
+        //TODO open simons view
+        if(createFragment == null){
+            createFragment = CreateFragment.newInstance();
+        }
+        android.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
+        trans.replace(R.id.fragment_container, createFragment, null);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -278,7 +293,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     return mapFragment;
                 case 0:
                     if(feedFragment == null){
-                        feedFragment = new FeedFragment();
+                        feedFragment = FeedFragment.newInstance();
                     }
                     return feedFragment;
             }
