@@ -71,7 +71,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         });
         ImageButton submit = (ImageButton) view.findViewById(R.id.submit_button);
         submit.setOnClickListener(this);
-        description = (EditText) view.findViewById(R.id.csdescription);
+        description = (EditText) view.findViewById(R.id.cs_description);
         ((MainActivity) getActivity()).getCurrentPlace(new ResultCallback<PlaceLikelihoodBuffer>() {
             @Override
             public void onResult(PlaceLikelihoodBuffer placeLikelihoods) {
@@ -81,6 +81,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
                 location = best.getLatLng();
                 ((TextView) view.findViewById(R.id.name)).setText(name);
                 ((TextView) view.findViewById(R.id.adress)).setText(address);
+                Log.d(TAG, "Place: " + name + " " + address);
             }
         });
         return view;
@@ -116,6 +117,8 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         Spot spot = new Spot(name, description.getText().toString(), address,
                 System.currentTimeMillis(), (float)location.latitude, (float)location.longitude);
         mListener.onSend(spot);
+        Log.d(TAG, "Submit");
+        getActivity().onBackPressed();
     }
 
     /**

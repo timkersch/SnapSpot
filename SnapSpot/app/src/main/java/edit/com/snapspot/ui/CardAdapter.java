@@ -31,6 +31,7 @@ public class CardAdapter extends ArrayAdapter<Card> {
     static class ViewHolder {
         TextView title;
         TextView description;
+        TextView time;
         int position;
     }
 
@@ -48,6 +49,7 @@ public class CardAdapter extends ArrayAdapter<Card> {
             viewHolder = new ViewHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.title);
             viewHolder.description = (TextView) convertView.findViewById(R.id.description);
+            viewHolder.time = (TextView) convertView.findViewById(R.id.time);
             viewHolder.position = position;
 
             // store the holder with the view.
@@ -61,6 +63,7 @@ public class CardAdapter extends ArrayAdapter<Card> {
         // get the TextView from the ViewHolder and then set the text (item name) and tag (item ID) values
         viewHolder.title.setText(cards.get(position).getSpot().getName());
         viewHolder.description.setText(cards.get(position).getSpot().getDescription());
+        viewHolder.time.setText(cards.get(position).getSpot().getTimestamp().toString());
 
         /*LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.card_layout, parent, false);
