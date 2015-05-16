@@ -24,7 +24,7 @@
 				android:id="@+id/floating_button"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				fab:fab_icon="@mipmap/ic_control_point_white"
+				fab:fab_icon="@mipmap/ic_control_point_white_nc"
 				fab:fab_colorNormal="@color/accent"
 				fab:fab_colorPressed="@color/accent_dark"
 				fab:fab_labelsPosition="right"
