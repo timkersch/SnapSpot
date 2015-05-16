@@ -21,12 +21,12 @@
                 android:id="@+id/cancel_button"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="0dp"
 
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:src="@mipmap/ic_remove"
 
                 />
 
@@ -37,6 +37,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_gravity="right"
                 android:layout_columnWeight="14"
+                android:src="@mipmap/ic_remove"
                 />
 
         </GridLayout>
@@ -62,7 +63,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_weight="1">
 
             <!-- 3 textvy 1 name -->
             <TextView
@@ -88,18 +89,23 @@
                 />
 
         </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/primary_material_dark"
+            />
 
         <!-- NUMMER 5 -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3">
+            android:layout_weight="9">
 
             <!-- 5 Ämnesrad -->
             <EditText
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLength="2000"
                 android:maxLines="4"
