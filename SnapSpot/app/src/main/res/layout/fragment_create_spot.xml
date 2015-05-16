@@ -33,12 +33,13 @@
 
             <!-- 2 Sändknapp -->
             <ImageButton
+                android:src="@mipmap/ic_remove"
                 android:id="@+id/submit_button"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:layout_gravity="right"
                 android:layout_columnWeight="14"
-                android:src="@mipmap/ic_remove"
+
                 />
 
         </GridLayout>
@@ -98,21 +99,22 @@
 
         <!-- NUMMER 5 -->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="9">
 
             <!-- 5 Ämnesrad -->
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/cs_description"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
                 android:layout_marginTop="10dp"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLength="2000"
                 android:maxLines="4"
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
-                android:hint="Ämne..."/>
+                android:hint="Description..."/>
 
         </LinearLayout>
 
