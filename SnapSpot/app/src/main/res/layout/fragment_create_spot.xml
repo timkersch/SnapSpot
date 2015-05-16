@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+    android:background="#ffffff"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <!--NUMMER 1 -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <!-- NUMMER 2 -->
+        <GridLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:rowCount="1"
+            android:columnCount="3">
+
+
+            <!-- 1 Kryssknapp -->
+            <ImageButton
+                android:id="@+id/cancel_button"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="10dp"
+
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                />
+
+            <!-- 2 Sändknapp -->
+            <ImageButton
+                android:id="@+id/submit_button"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_gravity="right"
+                android:layout_columnWeight="14"
+                />
+
+        </GridLayout>
+
+        <!-- 5 Ämnesrad -->
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/primary_material_dark"
+        />
+    <!-- NUMMER 3 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <!-- NUMMER 4 -->
+        <LinearLayout
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2">
+
+            <!-- 3 textvy 1 name -->
+            <TextView
+                android:text="name"
+                android:textSize="16dp"
+
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                />
+            <!-- 4 textvy 2 adress -->
+            <TextView
+                android:text="adress"
+                android:textSize="16dp"
+
+
+                android:id="@+id/adress"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+        <!-- NUMMER 5 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3">
+
+            <!-- 5 Ämnesrad -->
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="2000"
+                android:maxLines="4"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:hint="Ämne..."/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

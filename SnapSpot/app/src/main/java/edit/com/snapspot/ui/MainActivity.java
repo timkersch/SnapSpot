@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import android.location.Location;
+import android.net.Uri;
 import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -15,11 +16,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 
 import com.google.android.gms.common.ConnectionResult;
@@ -48,7 +51,8 @@ import edit.com.snapspot.models.Spot;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, FeedFragment.OnFragmentInteractionListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        FeedFragment.OnFragmentInteractionListener, CreateFragment.OnFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -66,15 +70,22 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     ViewPager mViewPager;
 
     private SupportMapFragment mapFragment;
+    private CreateFragment createFragment;
     private GoogleMap map;
     private FeedFragment feedFragment;
     private List<Marker> markers;
     private GoogleApiClient mGoogleApiClient;
+    private final String TAG = "MainActivity";
+    private boolean createOpen = false;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        actionBar = getSupportActionBar();
 
         DbOperations.registerGcm(this);
 
@@ -245,6 +256,41 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         //removePOI(new Spot(0, 0, id, "", "", null));
     }
 
+    @Override
+    public void onCreateNew() {
+        //TODO open simons view
+        if(createFragment == null){
+            createFragment = CreateFragment.newInstance();
+        }
+        android.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
+        trans.replace(R.id.create_new, createFragment);
+        trans.addToBackStack("createNew");
+        trans.commit();
+        createOpen = true;
+        actionBar.hide();
+        Log.d(TAG, "onCreateNew");
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (createOpen) {
+            backFromSettingsFragment();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    private void backFromSettingsFragment() {
+        createOpen = false;
+        getFragmentManager().popBackStack();
+        actionBar.show();
+    }
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
@@ -275,7 +321,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                     return mapFragment;
                 case 0:
                     if(feedFragment == null){
-                        feedFragment = new FeedFragment();
+                        feedFragment = FeedFragment.newInstance();
                     }
                     return feedFragment;
             }

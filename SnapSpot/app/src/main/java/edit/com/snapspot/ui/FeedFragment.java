@@ -3,6 +3,7 @@ package edit.com.snapspot.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.api.client.util.DateTime;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ import edit.com.snapspot.ui.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class FeedFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class FeedFragment extends Fragment implements AbsListView.OnItemClickListener, View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
@@ -40,6 +42,8 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
      * The fragment's ListView/GridView.
      */
     private AbsListView mListView;
+
+    private final String TAG = "FeedFragment";
 
     /**
      * The Adapter which will be used to populate the ListView/GridView with
@@ -49,7 +53,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
     private List<Card> cards;
 
     // TODO: Rename and change types of parameters
-    public static FeedFragment newInstance(String param1, String param2) {
+    public static FeedFragment newInstance() {
         return new FeedFragment();
     }
 
@@ -86,12 +90,16 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
 
+        FloatingActionButton floatingButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
+        floatingButton.setOnClickListener(this);
+
         return view;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Log.d(TAG, "Attach");
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -108,7 +116,11 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
 
     public void updateFeed(List<Spot> spots){
         // Update the adapter with new spots
-        mAdapter.clear();
+        cards.clear();
+        for(Spot s : spots){
+            cards.add(new Card(s));
+        }
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -117,6 +129,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(cards.get(position).getSpot().getName());
+            Log.d(TAG, "OnItemClick");
         }
     }
 
@@ -133,6 +146,16 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if (null != mListener) {
+            // Notify the active callbacks interface (the activity, if the
+            // fragment is attached to one) that an item has been selected.
+            mListener.onCreateNew();
+            Log.d(TAG, "OnFloatingClick");
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -145,7 +168,8 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+        void onFragmentInteraction(String id);
+        void onCreateNew();
     }
 
 }
