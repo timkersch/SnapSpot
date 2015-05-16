@@ -36,6 +36,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import edit.com.snapspot.R;
 import edit.com.snapspot.appEngineServices.DbOperations;
@@ -118,6 +119,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+
+        // Operations
+        DbOperations.registerGcm(getApplicationContext());
     }
 
     @Override
@@ -204,19 +208,36 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     public void getPOIs(){
         // Todo: Use callback to get POIs
+        //DbOperations.
+        List<Spot> spots = new ArrayList<>(); //TODO get from backend
+        // Clear all markers
+        map.clear();
+        // Insert new markers
+        for(Spot s : spots){
+            Marker m = map.addMarker(new MarkerOptions()
+                    .position(new LatLng(s.getLatitude(), s.getLongitude()))
+                    .title(s.getName())
+                    .snippet(s.getDescription()));
+            markers.add(m);
+        }
+        // Show markers
+        showAllMarkers();
+        // Update feed
+        feedFragment.updateFeed(spots);
     }
 
     public void addPOI(Spot spot){
-
+        DbOperations.addSpot(spot);
     }
 
     public void removePOI(Spot spot){
-
+        DbOperations.deleteSpot(spot);
     }
 
     @Override
     public void onFragmentInteraction(String id) {
-        
+        // Insert id (name) and delete
+        removePOI(new Spot(0, 0, id, ""));
     }
 
     /**

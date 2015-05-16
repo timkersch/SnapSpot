@@ -12,8 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edit.com.snapspot.R;
 
+import edit.com.snapspot.models.Spot;
 import edit.com.snapspot.ui.dummy.DummyContent;
 
 /**
@@ -39,6 +43,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
      * Views.
      */
     private ListAdapter mAdapter;
+    private List<Card> cards;
 
     // TODO: Rename and change types of parameters
     public static FeedFragment newInstance(String param1, String param2) {
@@ -57,14 +62,19 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         super.onCreate(savedInstanceState);
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+
+        cards = new ArrayList<>();
+        Spot tmp = new Spot((float)55.2, (float)55.2, "Test", "Desc");
+        cards.add(new Card(tmp));
+
+        mAdapter = new ArrayAdapter<>(getActivity(),
+                R.layout.card_layout, R.id.title, cards);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item, container, false);
+        View view = inflater.inflate(R.layout.fragment_feed, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
@@ -93,12 +103,16 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         mListener = null;
     }
 
+    public void updateFeed(List<Spot> spots){
+        // Update the adapter with new spots
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(cards.get(position).getSpot().getName());
         }
     }
 
