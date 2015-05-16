@@ -10,7 +10,6 @@ import edit.com.backend.records.SpotRecord;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static edit.com.backend.utils.OfyService.ofy;
 
@@ -20,14 +19,12 @@ import static edit.com.backend.utils.OfyService.ofy;
  * Date: 15-05-15
  * Time: 14:19
  */
-@Api(name = "spots", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.com.edit", ownerName = "backend.com.edit", packagePath = ""))
+@Api(name = "spot", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.com.edit", ownerName = "backend.com.edit", packagePath = ""))
 public class SpotEndpoint {
-
-	private static final Logger log = Logger.getLogger(SpotEndpoint.class.getName());
 
 	@ApiMethod(name = "addSpot")
 	public void addSpot(@Named("name") String name, @Named("description") String description,
-	                    @Named("latitude") float latitude, @Named("longitude") float longitude) {
+	                   @Named("latitude") float latitude, @Named("longitude") float longitude) {
 		SpotRecord record = new SpotRecord();
 		record.setGeoPt(new GeoPt(latitude, longitude));
 		record.setDescription(description);
@@ -35,7 +32,7 @@ public class SpotEndpoint {
 		ofy().save().entity(record).now();
 	}
 
-	@ApiMethod(name = "listSpots")
+	@ApiMethod(name = "getSpots")
 	public CollectionResponse<SpotRecord> getSpots() {
 		List<SpotRecord> spotRecords = ofy().load().type(SpotRecord.class).list();
 		return CollectionResponse.<SpotRecord>builder().setItems(spotRecords).build();
