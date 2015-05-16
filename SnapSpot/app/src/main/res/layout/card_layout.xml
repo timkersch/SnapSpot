@@ -5,7 +5,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="20dp"
     card_view:cardUseCompatPadding="true"
     android:elevation="4dp">
 
@@ -37,7 +37,7 @@
         </LinearLayout>
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="270dp"
+            android:layout_height="235dp"
             android:layout_below="@+id/header"
             android:src="@drawable/sample_image"
             android:id="@+id/image"
