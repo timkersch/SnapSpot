@@ -9,6 +9,7 @@ import com.google.appengine.api.datastore.GeoPt;
 import edit.com.backend.records.SpotRecord;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import static edit.com.backend.utils.OfyService.ofy;
@@ -24,11 +25,12 @@ public class SpotEndpoint {
 
 	@ApiMethod(name = "addSpot")
 	public void addSpot(@Named("name") String name, @Named("description") String description,
-	                   @Named("latitude") float latitude, @Named("longitude") float longitude) {
+	                   @Named("latitude") float latitude, @Named("longitude") float longitude, @Named("date")Date date) {
 		SpotRecord record = new SpotRecord();
 		record.setGeoPt(new GeoPt(latitude, longitude));
 		record.setDescription(description);
 		record.setName(name);
+		record.setDate(date);
 		ofy().save().entity(record).now();
 	}
 

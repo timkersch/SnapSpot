@@ -44,7 +44,7 @@ public class DbOperations {
 			protected Void doInBackground(Void... params) {
 				initSpotService();
 				try {
-					spotService.addSpot(spot.getName(), spot.getDescription(), spot.getLatitude(), spot.getLongitude());
+					spotService.addSpot(spot.getName(), spot.getDescription(), spot.getLatitude(), spot.getLongitude(), spot.getTimestamp());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -71,7 +71,7 @@ public class DbOperations {
 		}.execute();
 	}
 
-	public static void getSpots() {
+	public static void getSpots(final POICallback callback) {
 		new AsyncTask<Void, Void, List<Spot>>() {
 			@Override
 			protected List<Spot> doInBackground(Void... params) {
@@ -82,7 +82,7 @@ public class DbOperations {
 					List<SpotRecord> spots = record.getItems();
 					spotList = new ArrayList<Spot>(spots.size());
 					for(SpotRecord s : spots) {
-						spotList.add(new Spot(s.getGeoPt().getLatitude(), s.getGeoPt().getLongitude(), s.getName(), s.getDescription()));
+						spotList.add(new Spot(s.getGeoPt().getLatitude(), s.getGeoPt().getLongitude(), s.getName(), s.getDescription(), s.getDate()));
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -93,6 +93,7 @@ public class DbOperations {
 			@Override
 			protected void onPostExecute(List<Spot> spots) {
 				// Callback
+				callback.onPOIReady(spots);
 			}
 
 		}.execute();

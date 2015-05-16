@@ -12,7 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.google.api.client.util.DateTime;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import edit.com.snapspot.R;
@@ -42,7 +45,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
+    private CardAdapter mAdapter;
     private List<Card> cards;
 
     // TODO: Rename and change types of parameters
@@ -64,11 +67,11 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
         // TODO: Change Adapter to display your content
 
         cards = new ArrayList<>();
-        Spot tmp = new Spot((float)55.2, (float)55.2, "Test", "Desc");
+        Spot tmp = new Spot((float)55.2, (float)55.2, "Test", "Desc", "Skaraholm 3", new DateTime(new Date()));
+        cards.add(new Card(tmp));
         cards.add(new Card(tmp));
 
-        mAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.card_layout, R.id.title, cards);
+        mAdapter = new CardAdapter(getActivity(), R.layout.card_layout, cards);
     }
 
     @Override
@@ -105,6 +108,7 @@ public class FeedFragment extends Fragment implements AbsListView.OnItemClickLis
 
     public void updateFeed(List<Spot> spots){
         // Update the adapter with new spots
+        mAdapter.clear();
     }
 
     @Override
