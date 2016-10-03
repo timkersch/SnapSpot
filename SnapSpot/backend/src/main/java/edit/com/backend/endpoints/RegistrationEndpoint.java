@@ -1,32 +1,18 @@
-/*
-   For step-by-step instructions on connecting your Android application to this backend module,
-   see "App Engine Backend with Google Cloud Messaging" template documentation at
-   https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/GcmEndpoints
-*/
-
-package edit.com.backend;
+package edit.com.backend.endpoints;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
+import edit.com.backend.records.RegistrationRecord;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.inject.Named;
 
-import static edit.com.backend.OfyService.ofy;
+import static edit.com.backend.utils.OfyService.ofy;
 
-/**
- * A registration endpoint class we are exposing for a device's GCM registration id on the backend
- * <p/>
- * For more information, see
- * https://developers.google.com/appengine/docs/java/endpoints/
- * <p/>
- * NOTE: This endpoint does not use any form of authorization or
- * authentication! If this app is deployed, anyone can access this endpoint! If
- * you'd like to add authentication, take a look at the documentation.
- */
 @Api(name = "registration", version = "v1", namespace = @ApiNamespace(ownerDomain = "backend.com.edit", ownerName = "backend.com.edit", packagePath = ""))
 public class RegistrationEndpoint {
 
@@ -39,6 +25,7 @@ public class RegistrationEndpoint {
 	 */
 	@ApiMethod(name = "register")
 	public void registerDevice(@Named("regId") String regId) {
+		log.info("Register device");
 		if (findRecord(regId) != null) {
 			log.info("Device " + regId + " already registered, skipping register");
 			return;

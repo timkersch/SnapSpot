@@ -1,4 +1,4 @@
-package edit.com.backend;
+package edit.com.backend.records;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -15,7 +15,6 @@ public class RegistrationRecord {
 
 	@Index
 	private String regId;
-	// you can add more fields...
 
 	public RegistrationRecord() {
 	}
